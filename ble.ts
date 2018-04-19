@@ -6,7 +6,7 @@ const names = {
     '1809': 'Temperature'
 };
 
-const myDevices = ['xx:xx:xx:xx:xx:xx'];
+const myDevices = ['ec:39:31:49:ac:15'];
 let found_Devices = [];
 
 let inRange = [];
@@ -55,6 +55,7 @@ noble.on('discover', (peripheral) => {
             if (serviceData && serviceData.length) {
 
                 _.each(serviceData, (item) => {
+                    console.log(Date());
                     console.log(`${peripheral.advertisement.localName} => ${names[item.uuid.toString()]} - ${item.data.toString()}`);
                 });
                 console.log('---------------------');
