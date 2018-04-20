@@ -1,4 +1,3 @@
-// https://f.ruuvi.com/t/reading-measurements-with-raspberry-pi-3-and-node-js-noble/738
 var noble = require('noble');
 var _ = require('lodash');
 var names = {
@@ -53,3 +52,4 @@ noble.on('discover', function (peripheral) {
         }
     }
 });
+//# sourceMappingURL=ble.js.map
