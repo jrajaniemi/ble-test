@@ -12,11 +12,11 @@ let server = {
   }
 }
 
-const req = http.request(server, (res) => {
+const req = http.request(server, (res: any) => {
   console.log(`STATUS: ${res.statusCode}`);
   console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
   res.setEncoding('utf8');
-  res.on('data', (chunk) => {
+  res.on('data', (chunk: any) => {
     console.log(`BODY: ${chunk}`);
   });
   res.on('end', () => {
@@ -24,7 +24,7 @@ const req = http.request(server, (res) => {
   });
 });
 
-req.on('error', (e) => {
+req.on('error', (e: any) => {
   console.error(`problem with request: ${e.message}`);
   
 });
@@ -35,14 +35,13 @@ function sleep(delay: number) {
 }
 
 
-ruuvi.on('found', tag => {
+ruuvi.on('found', (tag: any) => {
   console.log('Found RuuviTag, id: ' + tag.id);
-  tag.on('updated', data => {
+  tag.on('updated', (data: any) => {
+    console.log('Got data from RuuviTag ' + tag.id + '\n' +Date() + ':\n' + JSON.stringify(data, null, '\t'));
     server.headers["Content-Length"] = Buffer.byteLength(data);
     req.write(data);
     req.end();
-
-    console.log('Got data from RuuviTag ' + tag.id + '\n' +Date() + ':\n' + JSON.stringify(data, null, '\t'));
   });
   sleep(3000);
 });

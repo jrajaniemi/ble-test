@@ -12,7 +12,7 @@
     "@types/lodash": "^4.14.106",
     "@types/noble": "0.0.35",
     "noble": "^1.9.1",
-    "node-ruuvitag": "^latest"
+    "node-ruuvitag": "latest"
   },
   "devDependencies": {}
 }

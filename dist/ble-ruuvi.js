@@ -32,10 +32,10 @@ function sleep(delay) {
 ruuvi.on('found', function (tag) {
     console.log('Found RuuviTag, id: ' + tag.id);
     tag.on('updated', function (data) {
+        console.log('Got data from RuuviTag ' + tag.id + '\n' + Date() + ':\n' + JSON.stringify(data, null, '\t'));
         server.headers["Content-Length"] = Buffer.byteLength(data);
         req.write(data);
         req.end();
-        console.log('Got data from RuuviTag ' + tag.id + '\n' + Date() + ':\n' + JSON.stringify(data, null, '\t'));
     });
     sleep(3000);
 });
