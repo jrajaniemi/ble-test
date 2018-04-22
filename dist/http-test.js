@@ -1,28 +1,33 @@
-var ruuvi = require("node-ruuvitag");
 var querystring = require('querystring');
 var http = require("http");
 var postData = querystring.stringify({
-    'msg': 'Hello World!'
+    "url": "https://ruu.vi/#BEAYAMech",
+    "dataFormat": 4,
+    "rssi": -34,
+    "humidity": 32,
+    "temperature": 24,
+    "pressure": 1011,
+    "eddystoneId": 133
 });
 var options = {
-    hostname: 'weather.gim.fi',
+    host: 'weather.gim.fi',
     port: 80,
-    path: '/123/',
+    path: '/123/index.php',
     method: 'POST',
     headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
         'Cache-Control': 'no-cache',
         'Content-Length': Buffer.byteLength(postData)
     }
 };
-var request = http.request(options, function (res) {
-    console.log("STATUS: " + res.statusCode);
-    console.log("HEADERS: " + JSON.stringify(res.headers));
-    res.setEncoding('utf8');
-    res.on('data', function (chunk) {
+var request = http.request(options, function (response) {
+    console.log('STATUS: ' + response.statusCode);
+    console.log("HEADERS: " + JSON.stringify(response.headers));
+    response.setEncoding('utf8');
+    response.on('data', function (chunk) {
         console.log("BODY: " + chunk);
     });
-    res.on('end', function () {
+    response.on('end', function () {
         console.log('No more data in response.');
     });
 });
